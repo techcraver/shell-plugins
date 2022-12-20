@@ -14,6 +14,12 @@ const (
 
 type ValueFunc func(ctx context.Context, in sdk.HTTPProvisionInput) (string, error)
 
+func FieldValue(fieldName sdk.FieldName) ValueFunc {
+	return func(ctx context.Context, in sdk.HTTPProvisionInput) (string, error) {
+		return in.ItemFields[fieldName], nil
+	}
+}
+
 func BearerToken(tokenFunc ValueFunc) sdk.HTTPProvisioner {
 	return HTTPHeadersProvisioner(map[string]ValueFunc{
 		HeaderNameAuthorization: func(ctx context.Context, in sdk.HTTPProvisionInput) (string, error) {

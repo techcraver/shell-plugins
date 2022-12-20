@@ -5,6 +5,7 @@ import (
 	"github.com/1Password/shell-plugins/sdk/credselect"
 	"github.com/1Password/shell-plugins/sdk/importer"
 	"github.com/1Password/shell-plugins/sdk/provision"
+	"github.com/1Password/shell-plugins/sdk/provision/http"
 	"github.com/1Password/shell-plugins/sdk/schema"
 	"github.com/1Password/shell-plugins/sdk/schema/credname"
 	"github.com/1Password/shell-plugins/sdk/schema/fieldname"
@@ -60,6 +61,9 @@ func PersonalAccessToken() schema.CredentialType {
 				"GITHUB_TOKEN": fieldname.Token,
 			}),
 		),
+		HTTP: schema.HTTPConfig{
+			Auth: http.BearerToken(http.FieldValue(fieldname.Token)),
+		},
 	}
 }
 
