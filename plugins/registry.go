@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"strings"
 
+	"github.com/1Password/shell-plugins/sdk"
+	"github.com/1Password/shell-plugins/sdk/credselect"
 	"github.com/1Password/shell-plugins/sdk/schema"
 )
 
@@ -49,4 +51,25 @@ func GetCredentialType(pluginName string, credentialName string) (schema.Credent
 
 func Register(p schema.Plugin) {
 	registry = append(registry, p)
+
+	for _, cred := range p.Credentials {
+		// Register all credentials for the "any" selector
+		RegisterCredentialSelector(p.Name, cred.Name, credselect.Any)
+
+		for selector := range cred.CustomProvisioners {
+			// Register selectors defined on the credential type
+			RegisterCredentialSelector(p.Name, cred.Name, selector)
+		}
+	}
+}
+
+func RegisterCredentialSelector(plugin string, credname sdk.CredentialName, selector sdk.CredentialSelector) {
+	// TODO: Add to credential registry
+}
+
+var credentialsBySelector = map[sdk.CredentialSelector][]CredentialRef{}
+
+type CredentialRef struct {
+	PluginName     string
+	CredentialName sdk.CredentialName
 }

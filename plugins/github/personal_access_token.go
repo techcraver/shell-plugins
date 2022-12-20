@@ -2,6 +2,7 @@ package github
 
 import (
 	"github.com/1Password/shell-plugins/sdk"
+	"github.com/1Password/shell-plugins/sdk/credselect"
 	"github.com/1Password/shell-plugins/sdk/importer"
 	"github.com/1Password/shell-plugins/sdk/provision"
 	"github.com/1Password/shell-plugins/sdk/schema"
@@ -36,6 +37,9 @@ func PersonalAccessToken() schema.CredentialType {
 			},
 		},
 		DefaultProvisioner: provision.EnvVars(defaultEnvVarMapping),
+		CustomProvisioners: map[sdk.CredentialSelector]sdk.Provisioner{
+			credselect.AuthenticatesToDockerRegistry: GHCRProvisioner(),
+		},
 		Importer: importer.TryAll(
 			importer.TryEnvVarPair(defaultEnvVarMapping),
 			importer.TryAllEnvVars(fieldname.Token, "GH_TOKEN", "GITHUB_PAT"),

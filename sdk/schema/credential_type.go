@@ -26,6 +26,24 @@ type CredentialType struct {
 
 	// The default provisioner to use for this credential if the executable doesn't override it.
 	DefaultProvisioner sdk.Provisioner
+
+	CustomProvisioners map[sdk.CredentialSelector]sdk.Provisioner
+
+	HTTP HTTPConfig
+}
+
+type HTTPConfig struct {
+	Auth sdk.HTTPProvisioner
+
+	// TODO: Add Validator func to allow plugins to make an HTTP to check if the credential is (still) valid
+	// Validator sdk.CredentialValidator
+}
+
+type HTTPAuth func(in sdk.ProvisionInput) HTTPAuthOutput
+
+type HTTPAuthOutput struct {
+	Headers     map[string]string
+	QueryParams map[string]string
 }
 
 // CredentialField provides the schema of a single field on a credential type.
