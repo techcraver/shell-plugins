@@ -39,7 +39,7 @@ func PersonalAccessToken() schema.CredentialType {
 		},
 		DefaultProvisioner: provision.EnvVars(defaultEnvVarMapping),
 		CustomProvisioners: map[sdk.CredentialSelector]sdk.Provisioner{
-			credselect.AuthenticatesToDockerRegistry: GHCRProvisioner(),
+			credselect.CanAuthenticateToDockerRegistry: GHCRProvisioner(),
 		},
 		Importer: importer.TryAll(
 			importer.TryEnvVarPair(defaultEnvVarMapping),

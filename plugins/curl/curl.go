@@ -15,7 +15,7 @@ func CurlCLI() schema.Executable {
 		NeedsAuth: needsauth.NotForHelpOrVersion(),
 		Uses: []schema.CredentialUsage{
 			{
-				Select:        credselect.AuthenticatesHTTPRequests,
+				Select:        credselect.CanAuthenticateHTTPRequests,
 				AllowMultiple: true,
 				ProvisionerFunc: func(plugin string, credentialType schema.CredentialType) sdk.Provisioner {
 					return CurlProvisioner(credentialType.HTTP)

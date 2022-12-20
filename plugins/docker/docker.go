@@ -16,7 +16,7 @@ func DockerCLI() schema.Executable {
 		Uses: []schema.CredentialUsage{
 			{
 				Description: "Authenticate to a Docker Registry for the push and pull commands.",
-				Select:      credselect.AuthenticatesToDockerRegistry,
+				Select:      credselect.CanAuthenticateToDockerRegistry,
 				NeedsAuth: needsauth.ForCommands(
 					[]string{"pull"},
 					[]string{"push"},

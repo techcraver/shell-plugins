@@ -63,7 +63,7 @@ func AccessKey() schema.CredentialType {
 		},
 		DefaultProvisioner: AWSProvisioner(),
 		CustomProvisioners: map[sdk.CredentialSelector]sdk.Provisioner{
-			credselect.AuthenticatesToDockerRegistry: ECRProvisioner(),
+			credselect.CanAuthenticateToDockerRegistry: ECRProvisioner(),
 		},
 		Importer: importer.TryAll(
 			importer.TryEnvVarPair(defaultEnvVarMapping),

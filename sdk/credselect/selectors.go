@@ -3,10 +3,10 @@ package credselect
 import "github.com/1Password/shell-plugins/sdk"
 
 const (
-	Any                           = sdk.CredentialSelector("any")
-	SAMLIdentityProvider          = sdk.CredentialSelector("saml")
-	AuthenticatesHTTPRequests     = sdk.CredentialSelector("http")
-	AuthenticatesToDockerRegistry = sdk.CredentialSelector("docker-registry")
+	Any                             = sdk.CredentialSelector("any")
+	SAMLIdentityProvider            = sdk.CredentialSelector("saml")
+	CanAuthenticateHTTPRequests     = sdk.CredentialSelector("http")
+	CanAuthenticateToDockerRegistry = sdk.CredentialSelector("docker-registry")
 )
 
 var details = map[sdk.CredentialSelector]sdk.CredentialSelectorDetails{
@@ -16,10 +16,10 @@ var details = map[sdk.CredentialSelector]sdk.CredentialSelectorDetails{
 	SAMLIdentityProvider: {
 		Description: "Credentials that can be used for SAML authentication",
 	},
-	AuthenticatesHTTPRequests: {
+	CanAuthenticateHTTPRequests: {
 		Description: "Credentials that can authenticate HTTP requests",
 	},
-	AuthenticatesToDockerRegistry: {
+	CanAuthenticateToDockerRegistry: {
 		Description: "Credentials that can be used to authenticate to a Docker Registry",
 	},
 }
